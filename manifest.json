@@ -1,0 +1,65 @@
+{
+  "id": "subscription",
+  "name": "Subscription",
+  "version": "0.1.0",
+  "apiVersion": "v1",
+  "description": "Track per-user subscription tiers with automatic role changes and expiration notifications.",
+  "author": "Arediss",
+  "entry": "dist/index.js",
+  "frontend": "frontend/index.tsx",
+  "settings": [
+    {
+      "key": "downgradeRoleName",
+      "label": "Role assigned on expiration",
+      "type": "string",
+      "required": true,
+      "default": "user"
+    },
+    {
+      "key": "notifyDaysBefore",
+      "label": "Days before expiration to send notification",
+      "type": "number",
+      "default": 7
+    },
+    {
+      "key": "notifyOnExpiration",
+      "label": "Also send a notification on the expiration day itself",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "key": "autoKickPlex",
+      "label": "Auto-kick from Plex after expiration",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "key": "autoKickDelayDays",
+      "label": "Days after expiration before the auto-kick fires",
+      "type": "number",
+      "default": 3
+    }
+  ],
+  "hooks": {
+    "routes": { "prefix": "/api/plugins/subscription" },
+    "jobs": [
+      {
+        "key": "subscription_check",
+        "label": "Check subscriptions for upcoming and past expirations",
+        "cron": "0 3 * * *"
+      }
+    ],
+    "ui": [
+      {
+        "hookPoint": "admin.tabs",
+        "props": { "label": "Subscriptions", "icon": "Coins" },
+        "order": 50
+      },
+      {
+        "hookPoint": "avatar.menu",
+        "props": {},
+        "order": 10
+      }
+    ]
+  }
+}
