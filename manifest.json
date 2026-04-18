@@ -7,7 +7,25 @@
   "author": "Arediss",
   "entry": "dist/index.js",
   "frontend": "frontend/index.tsx",
-  "services": ["plex"],
+  "services": [
+    "plex"
+  ],
+  "capabilities": [
+    "users:read",
+    "users:write",
+    "settings:plugin",
+    "settings:app",
+    "notifications",
+    "permissions"
+  ],
+  "capabilityReasons": {
+    "users:read": "Looks up user email / display name for subscription records and notifications.",
+    "users:write": "Promotes users to the tier role on assignment and downgrades/disables them on expiration.",
+    "settings:plugin": "Stores tiers + subscriptions in the plugin data dir and reads plugin-level settings (notify days, auto-kick flags).",
+    "settings:app": "Reads the app's plexMachineId setting to resolve the Plex server for auto-kick.",
+    "notifications": "Sends per-user notifications before and on subscription expiration.",
+    "permissions": "Declares admin-only permissions for tier and subscription management routes."
+  },
   "settings": [
     {
       "key": "downgradeRoleName",
@@ -42,7 +60,9 @@
     }
   ],
   "hooks": {
-    "routes": { "prefix": "/api/plugins/subscription" },
+    "routes": {
+      "prefix": "/api/plugins/subscription"
+    },
     "jobs": [
       {
         "key": "subscription_check",
@@ -53,7 +73,10 @@
     "ui": [
       {
         "hookPoint": "admin.tabs",
-        "props": { "label": "Subscriptions", "icon": "Coins" },
+        "props": {
+          "label": "Subscriptions",
+          "icon": "Coins"
+        },
         "order": 50
       },
       {
@@ -61,6 +84,12 @@
         "props": {},
         "order": 10
       }
+    ]
+  },
+  "engines": {
+    "oscarr": ">=0.6.0 <1.0.0",
+    "testedAgainst": [
+      "0.6.3"
     ]
   }
 }
