@@ -7,6 +7,7 @@
   "author": "Arediss",
   "entry": "dist/index.js",
   "frontend": "frontend/index.tsx",
+  "services": ["plex"],
   "settings": [
     {
       "key": "downgradeRoleName",
