@@ -1,6 +1,6 @@
 {
   "name": "oscarr-plugin-subscription",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Subscription tracking plugin for Oscarr — tiers, user assignments, expiration notifications, automatic role downgrade.",
   "type": "module",
   "main": "dist/index.js",

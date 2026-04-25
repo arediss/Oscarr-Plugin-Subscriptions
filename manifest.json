@@ -1,7 +1,7 @@
 {
   "id": "subscription",
   "name": "Subscription",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "apiVersion": "v1",
   "description": "Track per-user subscription tiers with automatic role changes and expiration notifications.",
   "author": "Arediss",
