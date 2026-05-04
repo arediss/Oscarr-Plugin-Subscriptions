@@ -50,10 +50,10 @@ console.log('Frontend (admin) built → dist/frontend/index.js');
 
 await build({
   ...frontendCommon,
-  entryPoints: [resolve(__dirname, 'frontend/hooks/avatar.menu.tsx')],
-  outfile: resolve(__dirname, 'dist/frontend/hooks/avatar.menu.js'),
+  entryPoints: [resolve(__dirname, 'frontend/hooks/account.section.tsx')],
+  outfile: resolve(__dirname, 'dist/frontend/hooks/account.section.js'),
 });
-console.log('Frontend (avatar.menu hook) built → dist/frontend/hooks/avatar.menu.js');
+console.log('Frontend (account.section hook) built → dist/frontend/hooks/account.section.js');
 
 // ── Tailwind CSS step (added by add-tailwind-to-plugin.mjs) ─────────────────
 import { spawn, spawnSync } from 'child_process';

@@ -24,7 +24,10 @@ interface ServiceInfo {
 }
 
 async function fetchServices(): Promise<ServiceInfo[]> {
-  const res = await fetch('/api/admin/services', { credentials: 'include' });
+  const res = await fetch('/api/admin/services', {
+    credentials: 'include',
+    headers: { 'X-Requested-With': 'oscarr' },
+  });
   if (!res.ok) return [];
   const data = (await res.json()) as ServiceInfo[];
   return Array.isArray(data) ? data : [];
@@ -34,6 +37,7 @@ async function unsharePlex(userId: number): Promise<void> {
   const res = await fetch(`/api/admin/plex/shared/${userId}`, {
     method: 'DELETE',
     credentials: 'include',
+    headers: { 'X-Requested-With': 'oscarr' },
   });
   if (!res.ok) {
     const err = (await res.json().catch(() => ({}))) as { error?: string };
@@ -54,7 +58,10 @@ type Status =
   | { label: 'No subscription'; tone: 'bg-white/5 text-ndp-text-dim' };
 
 async function fetchUsers(): Promise<AdminUser[]> {
-  const res = await fetch('/api/admin/users', { credentials: 'include' });
+  const res = await fetch('/api/admin/users', {
+    credentials: 'include',
+    headers: { 'X-Requested-With': 'oscarr' },
+  });
   if (!res.ok) throw new Error(`Users list failed: ${res.statusText}`);
   const data = (await res.json()) as { users?: AdminUser[] } | AdminUser[];
   return Array.isArray(data) ? data : data.users ?? [];

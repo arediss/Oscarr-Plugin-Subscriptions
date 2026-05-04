@@ -1,10 +1,12 @@
 const BASE = '/api/plugins/subscription';
 
 async function request<T>(method: string, path: string, body?: unknown): Promise<T> {
+  const headers: Record<string, string> = { 'X-Requested-With': 'oscarr' };
+  if (body) headers['Content-Type'] = 'application/json';
   const res = await fetch(`${BASE}${path}`, {
     method,
     credentials: 'include',
-    headers: body ? { 'Content-Type': 'application/json' } : undefined,
+    headers,
     body: body ? JSON.stringify(body) : undefined,
   });
   if (!res.ok) {
@@ -35,7 +37,10 @@ export interface Role {
 }
 
 export async function fetchRoles(): Promise<Role[]> {
-  const res = await fetch('/api/admin/roles', { credentials: 'include' });
+  const res = await fetch('/api/admin/roles', {
+    credentials: 'include',
+    headers: { 'X-Requested-With': 'oscarr' },
+  });
   if (!res.ok) throw new Error(`Failed to load roles (${res.status})`);
   const data = (await res.json()) as Role[] | { roles?: Role[] };
   return Array.isArray(data) ? data : data.roles ?? [];
